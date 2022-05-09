@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MovieSolvex.API.Models;
 using MovieSolvex.API.Repository;
@@ -18,11 +19,13 @@ namespace MovieSolvex.API.Controllers
    
         private readonly IMovieService _service;
         private readonly ITokenRepository _tokenRepository;
+        private readonly IMapper _mapper;
 
-        public MoviesController(IMovieService service, ITokenRepository tokenRepository)
+        public MoviesController(IMovieService service, ITokenRepository tokenRepository, IMapper mapper)
         {
             _service = service;
             _tokenRepository = tokenRepository;
+            _mapper = mapper;
         }
         
         [HttpGet]
@@ -47,6 +50,17 @@ namespace MovieSolvex.API.Controllers
             var Movie = _service.DeleteMovie(movie);
             return Ok(movie);
         }
+
+        //Unknown error
+
+        //[HttpGet]
+
+        //public ActionResult<MovieSolvexRequest> Add(MovieSolvexRequest request)
+        //{
+        //    Movie solvexRequest = _mapper.Map<Movie>(request);
+        //    return Ok();
+
+        //}
 
         [AllowAnonymous]
         [HttpPost]

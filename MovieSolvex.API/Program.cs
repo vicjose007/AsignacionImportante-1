@@ -1,9 +1,11 @@
 
+using AutoMapper;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using MovieSolvex.API;
 using MovieSolvex.API.Repository;
 using MovieSolvex.Application;
 using MovieSolvex.Infrastructure;
@@ -75,6 +77,14 @@ builder.Services.AddAuthentication(x =>
 	};
 });
 
+var mapperConfig = new MapperConfiguration(m =>
+{
+    m.AddProfile(new MappingProfile());
+});
+
+IMapper mapper = mapperConfig.CreateMapper();
+builder.Services.AddSingleton(mapper);
+builder.Services.AddMvc();
 
 builder.Services.AddDbContext<MovieDbContext>(opt => opt.UseSqlServer(configuration.GetConnectionString("DbConnection"),
     b => b.MigrationsAssembly("MovieSolvex.API")));
