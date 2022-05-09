@@ -40,6 +40,14 @@ namespace MovieSolvex.API.Controllers
             return Ok(movie);
         }
 
+
+        [HttpDelete]
+        public ActionResult<Movie> DeleteMovie(Movie movie)
+        {
+            var Movie = _service.DeleteMovie(movie);
+            return Ok(movie);
+        }
+
         [AllowAnonymous]
         [HttpPost]
         [Route("authenticate")]

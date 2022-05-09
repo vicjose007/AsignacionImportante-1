@@ -12,5 +12,6 @@ namespace MovieSolvex.Application
         List<Movie> GetAllMovies();
 
         Movie CreateMovie(Movie movie);
+        Movie DeleteMovie(Movie movie);
     }
 }

@@ -22,6 +22,12 @@ namespace MovieSolvex.Application
             return movie;
         }
 
+        public Movie DeleteMovie(Movie movie)
+        {
+            _movieRepository.DeleteMovie(movie);
+            return movie;
+        }
+
         public List<Movie> GetAllMovies()
         {
             var movies = _movieRepository.GetAllMovies();

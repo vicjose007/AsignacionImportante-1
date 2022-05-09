@@ -10,12 +10,7 @@ namespace MovieSolvex.Infrastructure
 {
     public class MovieRepository : IMovieRepository
     {
-        public static List<Movie> movies = new List<Movie>()
-        {
-            new Movie{ Id = 1, Name = "Pasantia", Price = 59},
-            new Movie{ Id = 2, Name = "Batman", Price = 58},
 
-        };
         private readonly MovieDbContext _movieDbContext;
 
         public MovieRepository(MovieDbContext movieDbContext)
@@ -29,6 +24,14 @@ namespace MovieSolvex.Infrastructure
            _movieDbContext.SaveChanges();
 
             return movie;
+        }
+
+        public Movie DeleteMovie(Movie movie)
+        {
+            _movieDbContext.Movies.Remove(movie);
+            _movieDbContext.SaveChanges();
+
+            return null;
         }
 
         public List<Movie> GetAllMovies()
